@@ -8,10 +8,10 @@ import (
 )
 
 var (
-	db *gorm.DB
+	DB *gorm.DB
 )
 
-func Connect() error {
+func ConnectDB() error {
 	h := os.Getenv("MYSQL_HOST")
 	u := os.Getenv("MYSQL_USER")
 	pwd := os.Getenv("MYSQL_PASSWORD")
@@ -23,11 +23,6 @@ func Connect() error {
 		return err
 
 	}
-	db = dbConnection
+	DB = dbConnection
 	return nil
-
-}
-
-func GetDB() *gorm.DB {
-	return db
 }

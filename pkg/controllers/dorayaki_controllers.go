@@ -3,11 +3,10 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
-	"strconv"
-
 	"labpro-backend/pkg/models"
 	"labpro-backend/pkg/utils"
+	"net/http"
+	"strconv"
 
 	"github.com/gorilla/mux"
 )

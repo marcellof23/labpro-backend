@@ -6,7 +6,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-var RegisterDorayakiStoreRoutes = func(router *mux.Router) {
+var DorayakiRoutesGroup = func(router *mux.Router) {
 	router.HandleFunc("/dorayaki/", controllers.CreateDorayaki).Methods("POST")
 	router.HandleFunc("/dorayaki/", controllers.GetDorayakis).Methods("GET")
 	router.HandleFunc("/dorayaki/{dorayakiId}", controllers.GetDorayakiById).Methods("GET")
