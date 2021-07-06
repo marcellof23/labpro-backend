@@ -25,6 +25,7 @@ func CreateDorayaki(w http.ResponseWriter, r *http.Request) {
 func GetDorayakis(w http.ResponseWriter, r *http.Request) {
 	newDorayakis := models.GetAllDorayakis()
 	res, _ := json.Marshal(newDorayakis)
+	fmt.Println(newDorayakis)
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)

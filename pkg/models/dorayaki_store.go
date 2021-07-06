@@ -2,17 +2,24 @@ package models
 
 import (
 	"labpro-backend/pkg/config"
+	"time"
 
 	"gorm.io/gorm"
 )
 
 type DorayakiStore struct {
-	gorm.Model
 	ID        int64 `gorm:"primaryKey"`
 	Nama      string
 	Jalan     string
 	Kecamatan string
 	Provinsi  string
+	CreatedAt time.Time `gorm:"column:created_at"`
+	UpdatedAt time.Time `gorm:"column:updated_at"`
+	DeletedAt time.Time `gorm:"column:deleted_at"`
+}
+
+func (DorayakiStore) TableName() string {
+	return "dorayaki_store"
 }
 
 func (b *DorayakiStore) CreateDorayakiStore() *DorayakiStore {

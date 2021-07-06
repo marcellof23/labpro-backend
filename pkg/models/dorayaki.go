@@ -1,17 +1,25 @@
 package models
 
 import (
+	"fmt"
 	"labpro-backend/pkg/config"
+	"time"
 
 	"gorm.io/gorm"
 )
 
 type Dorayaki struct {
-	gorm.Model
 	ID        int64 `gorm:"primaryKey"`
 	Rasa      string
 	Deskripsi string
 	Gambar    string
+	CreatedAt time.Time `gorm:"column:created_at"`
+	UpdatedAt time.Time `gorm:"column:updated_at"`
+	DeletedAt time.Time `gorm:"column:deleted_at"`
+}
+
+func (Dorayaki) TableName() string {
+	return "dorayaki"
 }
 
 func (b *Dorayaki) CreateDorayaki() *Dorayaki {
@@ -22,6 +30,8 @@ func (b *Dorayaki) CreateDorayaki() *Dorayaki {
 func GetAllDorayakis() []Dorayaki {
 	var Dorayakis []Dorayaki
 	config.DB.Find(&Dorayakis)
+	fmt.Println("Hello")
+	fmt.Println(Dorayakis)
 	return Dorayakis
 }
 
