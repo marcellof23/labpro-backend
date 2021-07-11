@@ -55,14 +55,17 @@ func UpdateDorayaki(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Error while parsing")
 	}
 	DorayakiDetails, db := models.GetDorayakiById(ID)
-	if updateDorayaki.Rasa != "" {
+	if updateDorayaki.Rasa != nil {
 		DorayakiDetails.Rasa = updateDorayaki.Rasa
 	}
-	if updateDorayaki.Deskripsi != "" {
+	if updateDorayaki.Deskripsi != nil {
 		DorayakiDetails.Deskripsi = updateDorayaki.Deskripsi
 	}
-	if updateDorayaki.Gambar != "" {
+	if updateDorayaki.Gambar != nil {
 		DorayakiDetails.Gambar = updateDorayaki.Gambar
+	}
+	if updateDorayaki.DorayakiStoreID != nil {
+		DorayakiDetails.DorayakiStoreID = updateDorayaki.DorayakiStoreID
 	}
 	db.Save(&DorayakiDetails)
 	res, _ := json.Marshal(DorayakiDetails)
@@ -83,4 +86,7 @@ func DeleteDorayaki(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
+}
+
+func MigrateDorayaki(w http.ResponseWriter, r *http.Request) {
 }

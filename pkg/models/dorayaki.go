@@ -10,10 +10,10 @@ import (
 
 type Dorayaki struct {
 	ID              int64 `gorm:"primaryKey"`
-	Rasa            string
-	Deskripsi       string
-	Gambar          string
-	DorayakiStoreID int64
+	Rasa            *string
+	Deskripsi       *string
+	Gambar          *string
+	DorayakiStoreID *int64
 	CreatedAt       time.Time `gorm:"column:created_at"`
 	UpdatedAt       time.Time `gorm:"column:updated_at"`
 	DeletedAt       time.Time `gorm:"column:deleted_at"`

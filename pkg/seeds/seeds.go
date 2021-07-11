@@ -11,7 +11,11 @@ func AllDorayaki() []seed.Seed {
 		{
 			Name: "CreateJane",
 			Run: func(db *gorm.DB) error {
-				err := CreateDorayaki(db, "Jane", "enak", "gada", 2)
+				var rasa = "jane"
+				var deskripsi = "enak"
+				var gambar = "gada"
+				var dorayakistoreId = int64(2)
+				err := CreateDorayaki(db, &rasa, &deskripsi, &gambar, &dorayakistoreId)
 				if err != nil {
 					return err
 				}
@@ -22,7 +26,11 @@ func AllDorayaki() []seed.Seed {
 		{
 			Name: "CreateJohn",
 			Run: func(db *gorm.DB) error {
-				err := CreateDorayaki(db, "John", "enak", "gada", 3)
+				var rasa = "John"
+				var deskripsi = "enak"
+				var gambar = "gada"
+				var dorayakistoreId = int64(2)
+				err := CreateDorayaki(db, &rasa, &deskripsi, &gambar, &dorayakistoreId)
 				if err != nil {
 					return err
 				}
@@ -32,7 +40,11 @@ func AllDorayaki() []seed.Seed {
 		{
 			Name: "CreateJohn",
 			Run: func(db *gorm.DB) error {
-				err := CreateDorayaki(db, "Yow", "enak", "gada", 2)
+				var rasa = "Yow"
+				var deskripsi = "enak"
+				var gambar = "gada"
+				var dorayakistoreId = int64(2)
+				err := CreateDorayaki(db, &rasa, &deskripsi, &gambar, &dorayakistoreId)
 				if err != nil {
 					return err
 				}
@@ -42,7 +54,11 @@ func AllDorayaki() []seed.Seed {
 		{
 			Name: "CreateJohn",
 			Run: func(db *gorm.DB) error {
-				err := CreateDorayaki(db, "Hehe", "enak", "gada", 3)
+				var rasa = "Hehe"
+				var deskripsi = "enak"
+				var gambar = "gada"
+				var dorayakistoreId = int64(3)
+				err := CreateDorayaki(db, &rasa, &deskripsi, &gambar, &dorayakistoreId)
 				if err != nil {
 					return err
 				}
@@ -52,7 +68,11 @@ func AllDorayaki() []seed.Seed {
 		{
 			Name: "CreateJohn",
 			Run: func(db *gorm.DB) error {
-				err := CreateDorayaki(db, "Lolo", "enak", "gada", 2)
+				var rasa = "Lolo"
+				var deskripsi = "enak"
+				var gambar = "gada"
+				var dorayakistoreId = int64(2)
+				err := CreateDorayaki(db, &rasa, &deskripsi, &gambar, &dorayakistoreId)
 				if err != nil {
 					return err
 				}
@@ -62,7 +82,11 @@ func AllDorayaki() []seed.Seed {
 		{
 			Name: "CreateJohn",
 			Run: func(db *gorm.DB) error {
-				err := CreateDorayaki(db, "Fafa", "enak", "gada", 1)
+				var rasa = "Fafa"
+				var deskripsi = "Ngga enak"
+				var gambar = "gada"
+				var dorayakistoreId = int64(1)
+				err := CreateDorayaki(db, &rasa, &deskripsi, &gambar, &dorayakistoreId)
 				if err != nil {
 					return err
 				}
@@ -72,7 +96,11 @@ func AllDorayaki() []seed.Seed {
 		{
 			Name: "CreateAssdf",
 			Run: func(db *gorm.DB) error {
-				err := CreateDorayaki(db, "Asdf", "enak", "gada", 1)
+				var rasa = "Asdf"
+				var deskripsi = "enak"
+				var gambar = "gada"
+				var dorayakistoreId = int64(1)
+				err := CreateDorayaki(db, &rasa, &deskripsi, &gambar, &dorayakistoreId)
 				if err != nil {
 					return err
 				}
