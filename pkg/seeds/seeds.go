@@ -6,12 +6,12 @@ import (
 	"gorm.io/gorm"
 )
 
-func All1() []seed.Seed {
+func AllDorayaki() []seed.Seed {
 	return []seed.Seed{
 		{
 			Name: "CreateJane",
 			Run: func(db *gorm.DB) error {
-				err := CreateDorayaki(db, "Jane", "enak", "gada")
+				err := CreateDorayaki(db, "Jane", "enak", "gada", 2)
 				if err != nil {
 					return err
 				}
@@ -22,7 +22,7 @@ func All1() []seed.Seed {
 		{
 			Name: "CreateJohn",
 			Run: func(db *gorm.DB) error {
-				err := CreateDorayaki(db, "John", "enak", "gada")
+				err := CreateDorayaki(db, "John", "enak", "gada", 3)
 				if err != nil {
 					return err
 				}
@@ -32,7 +32,7 @@ func All1() []seed.Seed {
 		{
 			Name: "CreateJohn",
 			Run: func(db *gorm.DB) error {
-				err := CreateDorayaki(db, "Yow", "enak", "gada")
+				err := CreateDorayaki(db, "Yow", "enak", "gada", 2)
 				if err != nil {
 					return err
 				}
@@ -42,7 +42,7 @@ func All1() []seed.Seed {
 		{
 			Name: "CreateJohn",
 			Run: func(db *gorm.DB) error {
-				err := CreateDorayaki(db, "Hehe", "enak", "gada")
+				err := CreateDorayaki(db, "Hehe", "enak", "gada", 3)
 				if err != nil {
 					return err
 				}
@@ -52,7 +52,7 @@ func All1() []seed.Seed {
 		{
 			Name: "CreateJohn",
 			Run: func(db *gorm.DB) error {
-				err := CreateDorayaki(db, "Lolo", "enak", "gada")
+				err := CreateDorayaki(db, "Lolo", "enak", "gada", 2)
 				if err != nil {
 					return err
 				}
@@ -62,7 +62,7 @@ func All1() []seed.Seed {
 		{
 			Name: "CreateJohn",
 			Run: func(db *gorm.DB) error {
-				err := CreateDorayaki(db, "Fafa", "enak", "gada")
+				err := CreateDorayaki(db, "Fafa", "enak", "gada", 1)
 				if err != nil {
 					return err
 				}
@@ -72,7 +72,7 @@ func All1() []seed.Seed {
 		{
 			Name: "CreateAssdf",
 			Run: func(db *gorm.DB) error {
-				err := CreateDorayaki(db, "Asdf", "enak", "gada")
+				err := CreateDorayaki(db, "Asdf", "enak", "gada", 1)
 				if err != nil {
 					return err
 				}
@@ -82,7 +82,7 @@ func All1() []seed.Seed {
 	}
 }
 
-func All2() []seed.Seed {
+func AllDorayakiStore() []seed.Seed {
 	return []seed.Seed{
 		{
 			Name: "CreateJane",

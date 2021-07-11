@@ -1,1 +1,1 @@
-migrate -path pkg/migrations -database "mysql://root:bodoamat@tcp(localhost:3306)/labpro-backend?charset=utf8mb4&parseTime=True&loc=Local" -verbose down
+migrate -path pkg/migrations -database "mysql://root:dorayaki@tcp(localhost:3306)/labpro-database?charset=utf8mb4&parseTime=True&loc=Local" -verbose down
