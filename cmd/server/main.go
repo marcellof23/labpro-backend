@@ -9,6 +9,7 @@ import (
 	"labpro-backend/pkg/routes"
 	"labpro-backend/pkg/seeds"
 
+	"github.com/go-chi/cors"
 	"github.com/gorilla/mux"
 	_ "gorm.io/driver/mysql"
 	_ "gorm.io/gorm"
@@ -19,15 +20,9 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Endpoint Hit: homePage")
 }
 
-func main() {
-	r := mux.NewRouter()
-
-	err := config.ConnectDB()
-	if err != nil {
-		log.Fatal("Error when connecting to database")
-	}
-
-	// config.DB.AutoMigrate(&models.Dorayaki{}, &models.DorayakiStore{})
+func seeding(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "You have seeds all the models!")
+	fmt.Println("Endpoint Hit: seeding")
 
 	for _, seed := range seeds.AllDorayakiStore() {
 		if err := seed.Run(config.DB); err != nil {
@@ -41,15 +36,34 @@ func main() {
 		}
 	}
 
+}
+
+func main() {
+	r := mux.NewRouter()
+
+	err := config.ConnectDB()
+	if err != nil {
+		log.Fatal("Error when connecting to database")
+	}
+
+	// config.DB.AutoMigrate(&models.Dorayaki{}, &models.DorayakiStore{})
+
 	log.Println("Success when connect to database")
 
 	routes.DorayakiRoutesGroup(r)
 	routes.DorayakiStoreRoutesGroup(r)
 
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"https://*", "http://*"},
+		AllowedHeaders:   []string{"Origin", "Content-Length", "Content-Type", "Authorization", "Access-Control-Allow-Origin", "Accept"},
+		AllowCredentials: true,
+	})
+
 	r.HandleFunc("/homepage", homePage)
-	http.Handle("/", r)
+	r.HandleFunc("/seeds", seeding)
+	handler := c.Handler(r)
 
 	log.Println("Connected to port http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", r))
+	log.Fatal(http.ListenAndServe(":8080", handler))
 
 }

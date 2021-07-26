@@ -13,6 +13,7 @@ import (
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/database"
 	"github.com/golang-migrate/migrate/v4/source"
+	"github.com/joho/godotenv"
 )
 
 const (
@@ -116,10 +117,10 @@ Database drivers: `+strings.Join(database.List(), ", ")+"\n", createUsage, gotoU
 		*sourcePtr = fmt.Sprintf("file://%v", *pathPtr)
 	}
 
-	// err := godotenv.Load()
-	// if err != nil {
-	// 	log.fatal("Error loading .envs file")
-	// }
+	err := godotenv.Load()
+	if err != nil {
+		log.fatal("Error loading .envs file")
+	}
 
 	if *databasePtr == "" {
 		h := os.Getenv("MYSQL_HOST")

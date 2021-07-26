@@ -1,8 +1,9 @@
 CREATE TABLE IF NOT EXISTS `dorayaki` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `rasa` longtext NOT NULL,
-  `deskripsi` longtext NOT NULL,
-  `gambar` longtext NOT NULL,
+  `id` bigint(20) DEFAULT NULL AUTO_INCREMENT,
+  `rasa` longtext DEFAULT NULL,
+  `deskripsi` longtext DEFAULT NULL,
+  `gambar` longtext DEFAULT NULL,
+  `jumlah`  bigint(20) DEFAULT NULL,
   `created_at` datetime(3) DEFAULT NULL,
   `updated_at` datetime(3) DEFAULT NULL,
   `deleted_at` datetime(3) DEFAULT NULL,

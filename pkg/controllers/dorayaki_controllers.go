@@ -16,7 +16,15 @@ var NewDorayaki models.Dorayaki
 func CreateDorayaki(w http.ResponseWriter, r *http.Request) {
 	dorayaki := &models.Dorayaki{}
 	utils.ParseBody(r, dorayaki)
-	b := dorayaki.CreateDorayaki()
+	b, err := dorayaki.CreateDorayaki()
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		mapErr := map[string]string{"message": err.Error()}
+		resError, _ := json.Marshal(mapErr)
+		w.Write(resError)
+		return
+	}
+
 	res, _ := json.Marshal(b)
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
@@ -25,7 +33,6 @@ func CreateDorayaki(w http.ResponseWriter, r *http.Request) {
 func GetDorayakis(w http.ResponseWriter, r *http.Request) {
 	newDorayakis := models.GetAllDorayakis()
 	res, _ := json.Marshal(newDorayakis)
-	fmt.Println(newDorayakis)
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
@@ -41,6 +48,42 @@ func GetDorayakiById(w http.ResponseWriter, r *http.Request) {
 	DorayakiDetails, _ := models.GetDorayakiById(ID)
 	res, _ := json.Marshal(DorayakiDetails)
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(res)
+}
+
+func GetDorayakiByIdStore(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	DorayakiStoreId := vars["DorayakiIdStore"]
+	ID, err := strconv.ParseInt(DorayakiStoreId, 0, 0)
+	if err != nil {
+		fmt.Println("Error while parsing")
+	}
+	DorayakiStoreDetails, _ := models.GetDorayakiByIdStore(ID)
+	res, _ := json.Marshal(DorayakiStoreDetails)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(res)
+}
+
+func VariantDorayaki(w http.ResponseWriter, r *http.Request) {
+	VariantDorayakiStores := models.GetAllVariant()
+	res, _ := json.Marshal(VariantDorayakiStores)
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(http.StatusOK)
+	w.Write(res)
+}
+
+func VariantDorayakiById(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	DorayakiId := vars["DorayakiId"]
+	ID, err := strconv.ParseInt(DorayakiId, 0, 0)
+	if err != nil {
+		fmt.Println("Error while parsing")
+	}
+	DorayakiVariantsByID, _ := models.GetVariantById(ID)
+	res, _ := json.Marshal(DorayakiVariantsByID)
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
 }
@@ -86,7 +129,4 @@ func DeleteDorayaki(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
-}
-
-func MigrateDorayaki(w http.ResponseWriter, r *http.Request) {
 }
