@@ -35,3 +35,7 @@ func ConnectDB() error {
 	DB = dbConnection
 	return nil
 }
+
+var (
+	DefaultPort = "8080"
+)

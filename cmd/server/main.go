@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"labpro-backend/pkg/config"
 	"labpro-backend/pkg/routes"
@@ -46,6 +47,11 @@ func main() {
 		log.Fatal("Error when connecting to database")
 	}
 
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		port = config.DefaultPort
+	}
 	// config.DB.AutoMigrate(&models.Dorayaki{}, &models.DorayakiStore{})
 
 	log.Println("Success when connect to database")
@@ -56,6 +62,7 @@ func main() {
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"https://*", "http://*"},
 		AllowedHeaders:   []string{"Origin", "Content-Length", "Content-Type", "Authorization", "Access-Control-Allow-Origin", "Accept"},
+		AllowedMethods:   []string{"*"},
 		AllowCredentials: true,
 	})
 
@@ -64,6 +71,6 @@ func main() {
 	handler := c.Handler(r)
 
 	log.Println("Connected to port http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", handler))
+	log.Fatal(http.ListenAndServe("0.0.0.0:8080", handler))
 
 }
