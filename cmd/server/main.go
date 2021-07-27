@@ -66,7 +66,7 @@ func main() {
 		AllowCredentials: true,
 	})
 
-	r.HandleFunc("/homepage", homePage)
+	r.HandleFunc("/homepages", homePage)
 	r.HandleFunc("/seeds", seeding)
 	handler := c.Handler(r)
 
