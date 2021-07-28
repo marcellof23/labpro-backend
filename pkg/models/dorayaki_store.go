@@ -13,10 +13,10 @@ type DorayakiStore struct {
 	Jalan     string
 	Kecamatan string
 	Provinsi  string
-	Dorayakis []Dorayaki
-	CreatedAt time.Time `gorm:"column:created_at"`
-	UpdatedAt time.Time `gorm:"column:updated_at"`
-	DeletedAt time.Time `gorm:"column:deleted_at"`
+	Dorayakis []Dorayaki `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	CreatedAt time.Time  `gorm:"column:created_at"`
+	UpdatedAt time.Time  `gorm:"column:updated_at"`
+	DeletedAt time.Time  `gorm:"column:deleted_at"`
 }
 
 func (DorayakiStore) TableName() string {

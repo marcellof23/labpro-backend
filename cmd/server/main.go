@@ -52,7 +52,7 @@ func main() {
 	if port == "" {
 		port = config.DefaultPort
 	}
-	// config.DB.AutoMigrate(&models.Dorayaki{}, &models.DorayakiStore{})
+	//config.DB.AutoMigrate(&models.Dorayaki{}, &models.DorayakiStore{})
 
 	log.Println("Success when connect to database")
 
@@ -61,8 +61,8 @@ func main() {
 
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"https://*", "http://*"},
-		AllowedHeaders:   []string{"Origin", "Content-Length", "Content-Type", "Authorization", "Access-Control-Allow-Origin", "Accept"},
-		AllowedMethods:   []string{"*"},
+		AllowedHeaders:   []string{"X-Requested-With", "Origin", "Content-Length", "Content-Type", "Authorization", "Access-Control-Allow-Origin", "Accept"},
+		AllowedMethods:   []string{"GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowCredentials: true,
 	})
 
