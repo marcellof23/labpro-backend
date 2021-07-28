@@ -1,1 +1,1 @@
-web: labpro-backends
+web: labpro-backend
