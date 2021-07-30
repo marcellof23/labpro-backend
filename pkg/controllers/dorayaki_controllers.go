@@ -16,6 +16,7 @@ var NewDorayaki models.Dorayaki
 func CreateDorayaki(w http.ResponseWriter, r *http.Request) {
 	dorayaki := &models.Dorayaki{}
 	utils.ParseBody(r, dorayaki)
+
 	b, err := dorayaki.CreateDorayaki()
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -46,6 +47,41 @@ func GetDorayakiById(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Error while parsing")
 	}
 	DorayakiDetails, _ := models.GetDorayakiById(ID)
+	res, _ := json.Marshal(DorayakiDetails)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(res)
+}
+
+func UpdateDorayakiByIdStore(w http.ResponseWriter, r *http.Request) {
+	var updateDorayaki = &models.Dorayaki{}
+	utils.ParseBody(r, updateDorayaki)
+
+	DorayakiDetails, db := models.TransferDorayaki(*updateDorayaki.DorayakiStoreID, *updateDorayaki.Rasa)
+	fmt.Println(DorayakiDetails)
+	if DorayakiDetails == nil {
+		fmt.Println("AAAAAAAAAAAA")
+		CreateDorayaki(w, r)
+		return
+	}
+	fmt.Println("BBBBBBBBB")
+	if updateDorayaki.Rasa != nil {
+		DorayakiDetails.Rasa = updateDorayaki.Rasa
+	}
+	if updateDorayaki.Deskripsi != nil {
+		DorayakiDetails.Deskripsi = updateDorayaki.Deskripsi
+	}
+	if updateDorayaki.Gambar != nil {
+		DorayakiDetails.Gambar = updateDorayaki.Gambar
+	}
+	if updateDorayaki.DorayakiStoreID != nil {
+		DorayakiDetails.DorayakiStoreID = updateDorayaki.DorayakiStoreID
+	}
+	if updateDorayaki.Jumlah != nil {
+		DorayakiDetails.Jumlah = updateDorayaki.Jumlah
+	}
+
+	db.Save(&DorayakiDetails)
 	res, _ := json.Marshal(DorayakiDetails)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
@@ -98,6 +134,8 @@ func UpdateDorayaki(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Error while parsing")
 	}
 	DorayakiDetails, db := models.GetDorayakiById(ID)
+
+	fmt.Println(ID)
 	if updateDorayaki.Rasa != nil {
 		DorayakiDetails.Rasa = updateDorayaki.Rasa
 	}
@@ -110,6 +148,10 @@ func UpdateDorayaki(w http.ResponseWriter, r *http.Request) {
 	if updateDorayaki.DorayakiStoreID != nil {
 		DorayakiDetails.DorayakiStoreID = updateDorayaki.DorayakiStoreID
 	}
+	if updateDorayaki.Jumlah != nil {
+		DorayakiDetails.Jumlah = updateDorayaki.Jumlah
+	}
+
 	db.Save(&DorayakiDetails)
 	res, _ := json.Marshal(DorayakiDetails)
 	w.Header().Set("Content-Type", "application/json")

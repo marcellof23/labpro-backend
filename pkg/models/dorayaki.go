@@ -53,13 +53,26 @@ func GetAllDorayakis() []Dorayaki {
 func GetDorayakiById(Id int64) (*Dorayaki, *gorm.DB) {
 	var getDorayaki Dorayaki
 	db := config.DB.Where("ID = ?", Id).Find(&getDorayaki)
-	return &getDorayaki, db
+	if db != nil {
+		return &getDorayaki, db
+	} else {
+		return nil, db
+	}
 }
 
 func GetDorayakiByIdStore(Id int64) ([]Dorayaki, *gorm.DB) {
 	var getDorayakiList []Dorayaki
 	db := config.DB.Where("dorayaki_store_id = ?", Id).Find(&getDorayakiList)
 	return getDorayakiList, db
+}
+
+func TransferDorayaki(StoreId int64, rasa string) (*Dorayaki, *gorm.DB) {
+	var Dorayaki *Dorayaki
+	db := config.DB.Where("dorayaki_store_id = ? and rasa = ?", StoreId, rasa).Find(&Dorayaki)
+	if db != nil {
+		return Dorayaki, db
+	}
+	return nil, db
 }
 
 func GetAllVariant() []Dorayaki {
